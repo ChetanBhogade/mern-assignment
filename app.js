@@ -27,7 +27,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(process.env.port || port, () => {
-  console.log(`App is running at ${port}`);
+  console.log(`App is running at ${process.env.port}`);
 });
 
 module.exports = app
