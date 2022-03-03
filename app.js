@@ -7,7 +7,7 @@ const app = express();
 const userRoutes = require("./userRoute");
 
 mongoose
-  .connect("mongodb://localhost:27017/test")
+  .connect(process.env.MONGODB_URL || "mongodb://localhost:27017/test")
   .then(() => {
     console.log("DB CONNECTED");
   })
@@ -22,7 +22,11 @@ app.use("/", userRoutes);
 
 const port = 8000;
 
-app.listen(port, () => {
+if (process.env.NODE_ENV === "production") {
+  console.log("Running on production env.");
+}
+
+app.listen(process.env.port || port, () => {
   console.log(`App is running at ${port}`);
 });
 
